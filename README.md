@@ -1,76 +1,83 @@
-TCIT Frontend – Challenge Técnico
+TCIT Backend API – Challenge Técnico
 
 Este proyecto corresponde a la segunda etapa del proceso de selección para CTIT.
-Consiste en una aplicación React con Redux Toolkit que consume una API REST para la gestión de publicaciones (posts).
+Consiste en una API JSON desarrollada con Node.js, Express y Sequelize, que permite gestionar publicaciones (posts) en una base de datos PostgreSQL.
 
 Tecnologías utilizadas
-- React
-- Redux Toolkit
-- React Redux
-- Axios
-- CSS
+- Node.js
+- Express.js
+- Sequelize (ORM)
+- PostgreSQL
+- CORS
 - JSON camelCase
-
-Estructura del proyecto
-
-frontend/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── PostFilter.jsx
-│   │   ├── PostForm.jsx
-│   │   └── PostList.jsx
-│   ├── redux/
-│   │   ├── postsSlice.js
-│   │   └── store.js
-│   ├── App.jsx
-│   ├── index.css
-│   └── index.js
-├── package.json
-└── README.md
 
 Requisitos
 - Node.js >= 18.x
-- Navegador moderno
+- PostgreSQL >= 13.x
+- Sequelize CLI (instalado globalmente)
 
 Pasos para levantar el proyecto
 
 1. Clona el repositorio
 
-git clone https://github.com/tu-usuario/tcit-frontend.git
-cd tcit-frontend
+git clone https://github.com/tu-usuario/tcit-backend.git
+cd tcit-backend
 
 2. Instala las dependencias
 
 npm install
 
-3. Levanta la aplicación
+3. Crea la base de datos
 
-npm start
+Desde pgAdmin o por consola, crea una base de datos llamada:
 
-La app quedará disponible en:
-http://localhost:3000
+tcit_db
 
-Funcionalidades
+4. Configura la conexión a PostgreSQL
 
-- Crear una nueva publicación con nombre y descripción.
-- Filtrar publicaciones por nombre en tiempo real.
-- Eliminar publicaciones individuales.
-- Interfaz visual mejorada con diseño limpio.
+Edita el archivo config/config.json con tus credenciales locales:
 
-Consideraciones
+{
+  "development": {
+    "username": "postgres",
+    "password": "tu_contraseña",
+    "database": "tcit_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
 
-Este frontend consume los datos desde:
-http://localhost:3001/posts
+5. Ejecuta las migraciones
 
-Asegúrate de tener el backend ejecutándose correctamente.
+npx sequelize-cli db:migrate
+
+6. Levanta el servidor
+
+node app.js
+
+La API quedará disponible en:
+http://localhost:3001
+
+Endpoints disponibles
+
+Método | Ruta           | Descripción
+GET    | /posts         | Obtener todos los posts
+POST   | /posts         | Crear un nuevo post
+DELETE | /posts/:id     | Eliminar un post por ID
+
+Ejemplo de cuerpo para POST
+
+{
+  "name": "Ejemplo de post",
+  "description": "Este es un contenido de prueba"
+}
 
 Buenas prácticas aplicadas
-- Componentización clara y reutilizable.
-- Estado global administrado con Redux Toolkit.
-- Uso de camelCase en código JS y JSON.
-- Consumo eficiente del backend con Axios y createAsyncThunk.
+- Estructura clara y modular.
+- Uso de Sequelize como ORM.
+- Código JS y JSON en camelCase.
+- Único llamado a la API al cargar vista (aplicado en frontend).
+- CRUD básico funcional para posts.
 
 Autor
 Desarrollado por Alonso González
