@@ -1,42 +1,77 @@
-TCIT Backend API – Challenge Técnico
+# TCIT Backend API – Challenge Técnico
 
-Este proyecto corresponde a la segunda etapa del proceso de selección para CTIT.
+Este proyecto corresponde a la segunda etapa del proceso de selección para CTIT.  
 Consiste en una API JSON desarrollada con Node.js, Express y Sequelize, que permite gestionar publicaciones (posts) en una base de datos PostgreSQL.
 
-Tecnologías utilizadas
+## Tecnologías utilizadas
+
 - Node.js
 - Express.js
 - Sequelize (ORM)
 - PostgreSQL
 - CORS
-- JSON camelCase
+- JSON en camelCase
 
-Requisitos
+## Estructura del proyecto
+
+```
+backend/
+├── app.js
+├── config/
+│   └── config.json
+├── migrations/
+│   └── [timestamp]-create-post.js
+├── models/
+│   ├── index.js
+│   └── post.js
+├── package.json
+├── .env
+├── .gitignore
+└── README.md
+```
+
+## Requisitos
+
 - Node.js >= 18.x
 - PostgreSQL >= 13.x
-- Sequelize CLI (instalado globalmente)
+- Sequelize CLI instalado globalmente
 
-Pasos para levantar el proyecto
+## Variables de entorno
+
+Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+
+```
+PORT=3001
+```
+
+## Pasos para levantar el proyecto
 
 1. Clona el repositorio
 
+```
 git clone https://github.com/tu-usuario/tcit-backend.git
 cd tcit-backend
+```
 
 2. Instala las dependencias
 
+```
 npm install
+```
 
 3. Crea la base de datos
 
-Desde pgAdmin o por consola, crea una base de datos llamada:
+Desde pgAdmin o consola, crea una base de datos llamada:
 
+```
 tcit_db
+```
 
-4. Configura la conexión a PostgreSQL
+4. Configura la conexión en `config/config.json`
 
-Edita el archivo config/config.json con tus credenciales locales:
+Ajusta el archivo con tus credenciales de PostgreSQL locales:
 
+```json
 {
   "development": {
     "username": "postgres",
@@ -46,39 +81,42 @@ Edita el archivo config/config.json con tus credenciales locales:
     "dialect": "postgres"
   }
 }
+```
 
 5. Ejecuta las migraciones
 
+```
 npx sequelize-cli db:migrate
+```
 
-6. Levanta el servidor
+6. Inicia el servidor
 
+```
 node app.js
+```
 
-La API quedará disponible en:
-http://localhost:3001
+El backend quedará disponible en: `http://localhost:3001`
 
-Endpoints disponibles
+## Endpoints disponibles
 
-Método | Ruta           | Descripción
-GET    | /posts         | Obtener todos los posts
-POST   | /posts         | Crear un nuevo post
-DELETE | /posts/:id     | Eliminar un post por ID
+| Método | Ruta         | Descripción                  |
+|--------|--------------|------------------------------|
+| GET    | /posts       | Obtener todas las publicaciones |
+| POST   | /posts       | Crear una nueva publicación     |
+| DELETE | /posts/:id   | Eliminar una publicación por ID |
 
-Ejemplo de cuerpo para POST
+### Ejemplo de solicitud POST
 
+```json
 {
   "name": "Ejemplo de post",
   "description": "Este es un contenido de prueba"
 }
+```
 
-Buenas prácticas aplicadas
-- Estructura clara y modular.
-- Uso de Sequelize como ORM.
-- Código JS y JSON en camelCase.
-- Único llamado a la API al cargar vista (aplicado en frontend).
-- CRUD básico funcional para posts.
 
-Autor
-Desarrollado por Alonso González
+
+## Autor
+
+Desarrollado por Alonso González  
 Julio 2025
